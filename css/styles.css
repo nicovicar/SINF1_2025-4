@@ -18,14 +18,14 @@
   }
   
   /* ---- Cabeçalho Superior: Book Colectors ---- */
-  .nombre-pagina {
+  .nome-pagina {
     text-align: center;       /* Centraliza o título */
     padding: 1rem;
     background-color: #fff;   
     border-bottom: 1px solid #ddd;
   }
   
-  .nombre-pagina h1 {
+  .nome-pagina h1 {
     font-size: 1.5rem;
   }
   
@@ -38,7 +38,7 @@
   }
   
   /* Contêiner flexível (para centralizar ou limitar a largura) */
-  header .contenedor {
+  header .contentor {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
