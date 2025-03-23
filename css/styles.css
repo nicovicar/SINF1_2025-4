@@ -167,6 +167,7 @@
   .bloco-info h3 {
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
+
   }
   
   .bloco-info p {
@@ -180,7 +181,13 @@
     font-size: 1.5rem;
   }
 
-  
+h3 a{
+  text-decoration: none;
+  color: #000;
+}
+h3 a:hover{
+  color: #333; /* Muda levemente a cor quando passa o mouse */ 
+}
   /* ---- Rodapé ---- */
   footer {
     background-color: #c26d0c;
