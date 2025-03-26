@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Book Collectors - Eventos</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+        .alerta-evento {
+            background-color: #ffeeba;
+            color: #856404;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+            display: inline-block;
+        }
+
+        .avaliacao {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .estrelas {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .estrela {
+            cursor: pointer;
+            color: #ccc;
+            font-size: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .estrela:hover,
+        .estrela.ativa {
+            color: #ffc107;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Nome da página na parte superior -->
+    <div class="nome-pagina">
+        <h1>Book Collectors</h1>
+    </div>
+
+    <!-- Barra de Navegação -->
+    <header>
+        <div class="contentor">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Ínicio</a></li>
+                    <li><a href="collections.html">Coleções</a></li>
+                    <li><a href="eventos.html">Eventos</a></li>
+                </ul>
+            </nav>
+
+            <form class="search-bar" action="meu-buscar.html" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <section class="bloco-lateral">
+            <div class="bloco-info">
+                <h3>Feira Internacional de Livros Raros</h3>
+                <p><strong>Data:</strong> 15 de abril de 2025</p>
+                <p><strong>Localização:</strong> Centro de Convenções de Lisboa</p>
+                <div id="alerta-1" class="alerta-evento"></div>
+                <p><strong>Descrição:</strong> 
+                    O maior evento de livros raros e edições especiais da Europa. Participação de editores,
+                    colecionadores e livreiros de mais de 30 países. Inclui leilões especiais e sessões
+                    de autógrafos com autores consagrados.
+                </p>
+                <div class="avaliacao" id="avaliacao-1">
+                    <!-- Sistema de avaliação será preenchido via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section class="bloco-lateral">
+            <div class="bloco-info">
+                <h3>Workshop de Restauração de Livros</h3>
+                <p><strong>Data:</strong> 2 de maio de 2025</p>
+                <p><strong>Localização:</strong> Biblioteca Nacional, Porto</p>
+                <div id="alerta-2" class="alerta-evento"></div>
+                <p><strong>Descrição:</strong> 
+                    Aprenda técnicas profissionais de conservação e restauração de livros antigos com
+                    especialistas do patrimônio cultural. Materiais inclusos. Vagas limitadas.
+                </p>
+                <div class="avaliacao" id="avaliacao-2">
+                    <!-- Sistema de avaliação será preenchido via JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>The Book Collectors</p>
+    </footer>
+
+    <script>
+        // Função para verificar datas e mostrar alertas
+        function verificarDatas() {
+            const eventos = [
+                {
+                    id: 'alerta-1',
+                    data: new Date('2025-04-15'),
+                    elemento: document.getElementById('alerta-1')
+                },
+                {
+                    id: 'alerta-2',
+                    data: new Date('2025-05-02'),
+                    elemento: document.getElementById('alerta-2')
+                }
+            ]
+
+            eventos.forEach(evento => {
+                const hoje = new Date()
+                const diffTime = evento.data - hoje
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
+                if (diffDays > 0 && diffDays <= 7) {
+                    evento.elemento.innerHTML = `⚠️ Evento próximo! Faltam ${diffDays} dias`
+                } else if (diffDays <= 0) {
+                    evento.elemento.innerHTML = '✅ Evento realizado'
+                    criarSistemaAvaliacao(evento.id.replace('alerta', 'avaliacao'))
+                }
+            })
+        }
+
+        // Função para criar estrelas de avaliação
+        function criarSistemaAvaliacao(id) {
+            const container = document.getElementById(id)
+            container.innerHTML = `
+                <p>Avalie este evento:</p>
+                <div class="estrelas">
+                    ${[1,2,3,4,5].map(i => 
+                        `<span class="estrela" data-rating="${i}">★</span>`
+                    ).join('')}
+                </div>
+            `
+
+            // Adicionar interatividade às estrelas
+            container.querySelectorAll('.estrela').forEach(estrela => {
+                estrela.addEventListener('click', function() {
+                    container.querySelectorAll('.estrela').forEach(e => e.classList.remove('ativa'))
+                    this.classList.add('ativa')
+                    // Aqui você pode adicionar lógica para enviar a avaliação
+                })
+            })
+        }
+
+        // Executar quando a página carregar
+        window.onload = verificarDatas
+    </script>
+</body>
+
+</html>
