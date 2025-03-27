@@ -1,167 +1,179 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Book Collectors - Eventos</title>
-    <link rel="stylesheet" href="../css/styles.css" />
-    <style>
-        .alerta-evento {
-            background-color: #ffeeba;
-            color: #856404;
-            padding: 0.5rem;
-            border-radius: 4px;
-            margin: 0.5rem 0;
-            display: inline-block;
-        }
-
-        .avaliacao {
-            margin-top: 1rem;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-        }
-
-        .estrelas {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .estrela {
-            cursor: pointer;
-            color: #ccc;
-            font-size: 1.5rem;
-            transition: color 0.2s;
-        }
-
-        .estrela:hover,
-        .estrela.ativa {
-            color: #ffc107;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Book Collectors - Eventos</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <!-- O excerto de design específico para a página de eventos está no CSS, conforme solicitado -->
 </head>
+<style>
+    /* Estilos específicos para a página de eventos */
+    .evento {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin: 2rem 0;
+      padding: 1rem;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+    .evento img {
+      width: 150px;
+      height: auto;
+      border-radius: 5px;
+    }
+    .evento-info {
+      flex: 1;
+    }
+    .evento-info h3 {
+      margin-bottom: 0.5rem;
+    }
+    .evento-info p {
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .rating-form {
+      margin-top: 1rem;
+    }
+    .rating-form label {
+      margin-right: 10px;
+    }
+    .alerta {
+      font-weight: bold;
+      color: #e66c08;
+    }
+  </style>
+<body class="eventos-page">
+  <!-- Cabeçalho com o nome da página -->
+  <div class="nome-pagina">
+    <h1>Book Collectors</h1>
+  </div>
 
-<body>
-    <!-- Nome da página na parte superior -->
-    <div class="nome-pagina">
-        <h1>Book Collectors</h1>
+  <!-- Barra de Navegação -->
+  <header>
+    <div class="contentor">
+      <nav>
+        <ul>
+          <li><a href="index.html">Ínicio</a></li>
+          <li><a href="collections.html">Coleções</a></li>
+          <li><a href="eventos.html">Eventos</a></li>
+        </ul>
+      </nav>
+      <form class="search-bar" action="meu-buscar.html" method="GET">
+        <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar">
+        <button type="submit">Buscar</button>
+      </form>
     </div>
+  </header>
 
-    <!-- Barra de Navegação -->
-    <header>
-        <div class="contentor">
-            <nav>
-                <ul>
-                    <li><a href="index.html">Ínicio</a></li>
-                    <li><a href="collections.html">Coleções</a></li>
-                    <li><a href="eventos.html">Eventos</a></li>
-                </ul>
-            </nav>
+  <!-- Conteúdo Principal -->
+  <main>
+    <article class="evento" data-event-date="2025-04-15">
+      <header>
+        <h2>Feira Internacional de Livros Raros</h2>
+        <p><strong>Data:</strong> 15 de abril de 2025</p>
+        <p><strong>Localização:</strong> Centro de Convenções de Lisboa</p>
+      </header>
+      <section>
+        <p><strong>Descrição:</strong> O maior evento de livros raros e edições especiais da Europa. Participação de editores, colecionadores e livreiros de mais de 30 países. Inclui leilões especiais e sessões de autógrafos com autores consagrados.</p>
+      </section>
+      <!-- Alerta para data próxima ou status do evento -->
+      <div id="alerta-1" class="alerta-evento"></div>
+      <!-- Se o evento já ocorreu, o sistema permite a avaliação -->
+      <div id="avaliacao-1" class="avaliacao"></div>
+    </article>
 
-            <form class="search-bar" action="meu-buscar.html" method="GET">
-                <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar">
-                <button type="submit">Buscar</button>
-            </form>
+    <article class="evento" data-event-date="2025-05-02">
+      <header>
+        <h2>Workshop de Restauração de Livros</h2>
+        <p><strong>Data:</strong> 2 de maio de 2025</p>
+        <p><strong>Localização:</strong> Biblioteca Nacional, Porto</p>
+      </header>
+      <section>
+        <p><strong>Descrição:</strong> Aprenda técnicas profissionais de conservação e restauração de livros antigos com especialistas do patrimônio cultural. Materiais inclusos. Vagas limitadas.</p>
+      </section>
+      <div id="alerta-2" class="alerta-evento"></div>
+      <div id="avaliacao-2" class="avaliacao"></div>
+    </article>
+
+    <article class="evento" data-event-date="2025-03-22">
+        <header>
+          <h2>Workshop de Escrita Criativa Livre</h2>
+          <p><strong>Data:</strong> 22 de março de 2025</p>
+          <p><strong>Horário:</strong> 15h às 18h</p>
+          <p><strong>Local:</strong> Olga Santos Galeria</p>
+        </header>
+        <section>
+          <p>
+            <strong>Descrição:</strong>  
+            Descubra e desenvolva o poder da sua imaginação e liberte a sua voz interior neste workshop de escrita criativa livre! 
+            Num ambiente criativo, descontraído e inspirador, exploraremos a arte da escrita através de exercícios simples e acessíveis a todos. 
+            Na sessão, os participantes irão desenvolver exercícios dinâmicos que estimulam a escrita criativa e ajudam a superar bloqueios, 
+            onde cada um pode expressar as suas ideias e emoções. No final do workshop, teremos um conjunto de textos criativos.
+          </p>
+        </section>
+        <!-- Alerta para data próxima ou status do evento -->
+        <div id="alerta-3" class="alerta-evento"></div>
+        <!-- Se o evento já ocorreu, o sistema permite a avaliação -->
+        <div id="avaliacao-3" class="avaliacao"></div>
+      </article>
+      <!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Avaliação por Estrelas</title>
+</head>
+<body>
+</html>
+
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>The Book Collectors</p>
+  </footer>
+
+  <!-- Script para alertas de data e sistema de avaliação -->
+  <script>
+    function verificarEventos() {
+      const eventos = document.querySelectorAll('.evento');
+      const hoje = new Date();
+      
+      eventos.forEach(evento => {
+        const dataEvento = new Date(evento.getAttribute('data-event-date'));
+        const diffTime = dataEvento - hoje;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const alerta = evento.querySelector('.alerta-evento');
+        const avaliacao = evento.querySelector('.avaliacao');
+
+        if (diffDays > 0 && diffDays <= 7) {
+          alerta.innerHTML = `⚠️ Evento próximo! Faltam ${diffDays} dias`;
+        } else if (diffDays <= 0) {
+          alerta.innerHTML = '✅ Evento realizado';
+          criarSistemaAvaliacao(avaliacao);
+        }
+      });
+    }
+
+    function criarSistemaAvaliacao(container) {
+      container.innerHTML = `
+        <p>Avalie este evento:</p>
+        <div class="estrelas">
+          ${[1, 2, 3, 4, 5].map(i => `<span class="estrela" data-rating="${i}">★</span>`).join('')}
         </div>
-    </header>
+      `;
+      container.querySelectorAll('.estrela').forEach(estrela => {
+        estrela.addEventListener('click', function() {
+          container.querySelectorAll('.estrela').forEach(e => e.classList.remove('ativa'));
+          this.classList.add('ativa');
+          // Lógica para enviar a avaliação pode ser implementada aqui
+        });
+      });
+    }
 
-    <main>
-        <section class="bloco-lateral">
-            <div class="bloco-info">
-                <h3>Feira Internacional de Livros Raros</h3>
-                <p><strong>Data:</strong> 15 de abril de 2025</p>
-                <p><strong>Localização:</strong> Centro de Convenções de Lisboa</p>
-                <div id="alerta-1" class="alerta-evento"></div>
-                <p><strong>Descrição:</strong> 
-                    O maior evento de livros raros e edições especiais da Europa. Participação de editores,
-                    colecionadores e livreiros de mais de 30 países. Inclui leilões especiais e sessões
-                    de autógrafos com autores consagrados.
-                </p>
-                <div class="avaliacao" id="avaliacao-1">
-                    <!-- Sistema de avaliação será preenchido via JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <section class="bloco-lateral">
-            <div class="bloco-info">
-                <h3>Workshop de Restauração de Livros</h3>
-                <p><strong>Data:</strong> 2 de maio de 2025</p>
-                <p><strong>Localização:</strong> Biblioteca Nacional, Porto</p>
-                <div id="alerta-2" class="alerta-evento"></div>
-                <p><strong>Descrição:</strong> 
-                    Aprenda técnicas profissionais de conservação e restauração de livros antigos com
-                    especialistas do patrimônio cultural. Materiais inclusos. Vagas limitadas.
-                </p>
-                <div class="avaliacao" id="avaliacao-2">
-                    <!-- Sistema de avaliação será preenchido via JavaScript -->
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Rodapé -->
-    <footer>
-        <p>The Book Collectors</p>
-    </footer>
-
-    <script>
-        // Função para verificar datas e mostrar alertas
-        function verificarDatas() {
-            const eventos = [
-                {
-                    id: 'alerta-1',
-                    data: new Date('2025-04-15'),
-                    elemento: document.getElementById('alerta-1')
-                },
-                {
-                    id: 'alerta-2',
-                    data: new Date('2025-05-02'),
-                    elemento: document.getElementById('alerta-2')
-                }
-            ]
-
-            eventos.forEach(evento => {
-                const hoje = new Date()
-                const diffTime = evento.data - hoje
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-                if (diffDays > 0 && diffDays <= 7) {
-                    evento.elemento.innerHTML = `⚠️ Evento próximo! Faltam ${diffDays} dias`
-                } else if (diffDays <= 0) {
-                    evento.elemento.innerHTML = '✅ Evento realizado'
-                    criarSistemaAvaliacao(evento.id.replace('alerta', 'avaliacao'))
-                }
-            })
-        }
-
-        // Função para criar estrelas de avaliação
-        function criarSistemaAvaliacao(id) {
-            const container = document.getElementById(id)
-            container.innerHTML = `
-                <p>Avalie este evento:</p>
-                <div class="estrelas">
-                    ${[1,2,3,4,5].map(i => 
-                        `<span class="estrela" data-rating="${i}">★</span>`
-                    ).join('')}
-                </div>
-            `
-
-            // Adicionar interatividade às estrelas
-            container.querySelectorAll('.estrela').forEach(estrela => {
-                estrela.addEventListener('click', function() {
-                    container.querySelectorAll('.estrela').forEach(e => e.classList.remove('ativa'))
-                    this.classList.add('ativa')
-                    // Aqui você pode adicionar lógica para enviar a avaliação
-                })
-            })
-        }
-
-        // Executar quando a página carregar
-        window.onload = verificarDatas
-    </script>
+    window.onload = verificarEventos;
+  </script>
 </body>
-
 </html>
