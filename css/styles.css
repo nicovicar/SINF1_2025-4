@@ -196,53 +196,5 @@ h3 a:hover{
     padding: 1rem;
   }
 
-/* Design para a página de eventos */
-.eventos-page article.evento {
-  margin: 2rem auto;
-  padding: 1.5rem;
-  border-bottom: 1px solid #ddd;
-}
-
-.eventos-page .alerta-evento {
-  background-color: #ffeeba;
-  color: #856404;
-  padding: 0.75rem 1rem;
-  border-radius: 4px;
-  margin: 1rem 0;
-  display: inline-block;
-}
-
-.eventos-page .avaliacao {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-}
-
-.eventos-page .estrelas {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.eventos-page .estrela {
-  cursor: pointer;
-  color: #ccc;
-  font-size: 1.75rem;
-  transition: color 0.2s;
-}
-
-.eventos-page .estrela:hover,
-.eventos-page .estrela.ativa {
-  color: #ffc107;
-}
-
-.bloco-lateral {
-  background-color: #c26d0c; /* Exemplo de cor de fundo laranja */
-  color: #000;              /* Cor do texto */
-  padding: 1rem;           /* Espaçamento interno (ajuste conforme desejar) */
-  margin-bottom: 1rem;     /* Espaçamento externo inferior (opcional) */
-  border-radius: 5px;      /* Borda arredondada (opcional) */
-}
 
 
