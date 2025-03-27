@@ -224,6 +224,37 @@ h3 a:hover{
             font-weight: bold;
         }
 
+  /* ---- pagina pesquisa ---- */
+
+  .search-container {
+      text-align: center;
+      padding: 20px;
+  }
+
+  .result-list {
+      max-width: 600px;
+      margin: auto;
+      text-align: left;
+      list-style-type: none;
+      padding: 0;
+  }
+
+  .result-list li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+  }
+
+  .result-list a {
+      text-decoration: none;
+      color: #007bff;
+  }
+
+  .result-list a:hover {
+      text-decoration: underline;
+  }
+
+
+  
   /* ---- Rodapé ---- */
   footer {
     background-color: #c26d0c;
