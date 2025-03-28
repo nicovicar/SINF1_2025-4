@@ -31,7 +31,12 @@
   
   /* ---- Barra de Navegação ---- */
   header {
-    background-color: #c26d0c; /* Laranja */
+    /* background-color: #c26d0c; Laranja */
+    width: 100%;
+    /* Ajuste o espaçamento superior/inferior para posicionar melhor a barra */
+    padding: 1rem 0;
+  }
+  .eventos header{
     width: 100%;
     /* Ajuste o espaçamento superior/inferior para posicionar melhor a barra */
     padding: 1rem 0;
@@ -39,6 +44,7 @@
   
   /* Contêiner flexível (para centralizar ou limitar a largura) */
   header .contentor {
+    background-color: #c26d0c;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;

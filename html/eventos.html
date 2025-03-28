@@ -6,44 +6,6 @@
   <title>The Book Collectors - Eventos</title>
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
-<style>
-    /* Estilos página de eventos */
-    .evento {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin: 2rem 0;
-      padding: 1rem;
-      background-color: #fff;
-      border-radius: 5px;
-    }
-    .evento img {
-      width: 150px;
-      height: auto;
-      border-radius: 5px;
-    }
-    .evento-info {
-      flex: 1;
-    }
-    .evento-info h3 {
-      margin-bottom: 0.5rem;
-    }
-    .evento-info p {
-      padding: 1rem;  
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-    .rating-form {
-      margin-top: 1rem;
-    }
-    .rating-form label {
-      margin-right: 10px;
-    }
-    .alerta {
-      font-weight: bold;
-      color: #e66c08;
-    }
-  </style>
 <body class="eventos-page">
   <!-- Cabeçalho com o nome da página -->
   <div class="nome-pagina">
@@ -78,7 +40,7 @@
       <section>
         <p><strong>Descrição:</strong> O maior evento de livros raros e edições especiais da Europa. Participação de editores, colecionadores e livreiros de mais de 30 países. Inclui leilões especiais e sessões de autógrafos com autores consagrados.</p>
       </section>
-      <!-- Alerta para data próxima ou status do evento -->
+      <!-- Alerta para data próxima -->
       <div id="alerta-1" class="alerta-evento"></div>
       <!-- Se o evento já ocorreu, o sistema permite a avaliação -->
       <div id="avaliacao-1" class="avaliacao"></div>
@@ -97,36 +59,31 @@
       <div id="avaliacao-2" class="avaliacao"></div>
     </article>
 
-    <article class="evento" data-event-date="2025-03-22">
-        <header>
-          <h2>Workshop de Escrita Criativa Livre</h2>
-          <p><strong>Data:</strong> 22 de março de 2025</p>
-          <p><strong>Horário:</strong> 15h às 18h</p>
-          <p><strong>Local:</strong> Olga Santos Galeria</p>
-        </header>
-        <section>
-          <p>
-            <strong>Descrição:</strong>  
-            Descubra e desenvolva o poder da sua imaginação e liberte a sua voz interior neste workshop de escrita criativa livre! 
-            Num ambiente criativo, descontraído e inspirador, exploraremos a arte da escrita através de exercícios simples e acessíveis a todos. 
-            Na sessão, os participantes irão desenvolver exercícios dinâmicos que estimulam a escrita criativa e ajudam a superar bloqueios, 
-            onde cada um pode expressar as suas ideias e emoções. No final do workshop, teremos um conjunto de textos criativos.
-          </p>
-        </section>
-        <!-- Alerta para data próxima ou status do evento -->
-        <div id="alerta-3" class="alerta-evento"></div>
-        <!-- Se o evento já ocorreu, o sistema permite a avaliação -->
-        <div id="avaliacao-3" class="avaliacao"></div>
-      </article>
-      <!DOCTYPE html>
-<html lang="pt">
 <head>
   <meta charset="UTF-8">
   <title>Avaliação por Estrelas</title>
 </head>
-<body>
-</html>
 
+    <section class="bloco-lateral">
+        <div class="bloco-imagem">
+            <img src="../fotos/evento_1.jpeg" alt="evento_1" />
+        </div>
+        <div class="bloco-info">
+            <h3>Workshop de Escrita Criativa Livre</h3>
+            <p><strong>Data:</strong> 22 de março 2025</p>
+            <p><strong>Horário:</strong> 15h ás 18h</p>
+            <p><strong>Local:</strong> Olga Santos Galeria</p>
+            <p><strong>Descrição: </strong>
+                Descubra e desenvolva o poder da sua imaginação e liberte a sua voz interior neste workshop de
+                escrita criativa livre!
+                Num ambiente criativo, descontraído e inspirador exploraremos a arte da escrita através de
+                exercícios simples e acessíveis a todos.
+                Na sessão, os participantes irão desenvolver exercícios dinâmicos que estimulam a escrita
+                criativa e ajudam a superar bloqueios e onde cada um pode expressar as suas ideias e emoções.
+                No final do workshop, teremos um conjunto de textos criativos. </p>
+        </div>
+    </section>
+<body>
 
   </main>
 
