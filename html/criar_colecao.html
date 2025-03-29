@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Criar Nova Coleção</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <!-- Título da Página -->
+  <div class="criar_colecao">
+    <h1>Book Collectors</h1>
+  </div>
+
+  <!-- Barra de Navegação -->
+  <header>
+    <div class="contentor">
+        <nav>
+            <ul>
+                <li><a href="index.html">Ínicio</a></li>
+                <li><a href="collections.html">Coleções</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="criar_colecao.html">Criar coleção</a></li>
+
+            </ul>
+        </nav>
+
+        <form class="search-bar" action="resultados.html" method="GET">
+            <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar" required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+</header>
+
+  <!-- Formulário para Criar Nova Coleção -->
+  <main>
+    <section>
+      <h2>Criar Nova Coleção</h2>
+      <form id="collectionForm">
+        <div class="form-group">
+          <label for="collectionImage">Imagem da Coleção:</label>
+          <input type="file" id="collectionImage" name="collectionImage" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+          <label for="author">Autor:</label>
+          <input type="text" id="author" name="author" required>
+        </div>
+
+        <div class="form-group">
+          <label for="titles">Títulos da Coleção:</label>
+          <textarea id="titles" name="titles" rows="2" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="yearEdition">Ano de Edição:</label>
+          <input type="number" id="yearEdition" name="yearEdition" required>
+        </div>
+
+        <div class="form-group">
+          <label for="editor">Editor:</label>
+          <input type="text" id="editor" name="editor" required>
+        </div>
+
+        <div class="form-group">
+          <label for="language">Idioma:</label>
+          <input type="text" id="language" name="language" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dimensions">Dimensões:</label>
+          <input type="text" id="dimensions" name="dimensions" placeholder="Ex: 20x30 cm" required>
+        </div>
+
+        <div class="form-group">
+          <label for="binding">Encadernação:</label>
+          <input type="text" id="binding" name="binding" required>
+        </div>
+
+        <div class="form-group">
+          <label for="pages">Páginas:</label>
+          <input type="number" id="pages" name="pages" min="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Descrição:</label>
+          <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-colecao">Criar Coleção</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Book Collectors</p>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
