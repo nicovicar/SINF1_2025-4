@@ -37,8 +37,6 @@ if(loginButton){
         if (nomes.includes(username) && pass.includes(password)) {
             alert("You have successfully logged in.");
             location.href="index.html";
-        } else if (username !== null && password !== null) {
-            alert("Erro");
         }
         else {
             alert("Erro");
