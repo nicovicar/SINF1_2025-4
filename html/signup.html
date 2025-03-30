@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script defer src="../js/login-sign-page.js"></script>
+</head>
+
+<body>
+       <!-- Nome da página na parte superior -->
+       <div class="nome-pagina">
+        <h1>Book Collectors</h1>
+    </div>
+
+    <!-- Barra de Navegação logo abaixo -->
+    <header>
+        <div class="contentor">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Ínicio</a></li>
+                    <li><a href="collections.html">Coleções</a></li>
+                    <li><a href="eventos.html">Eventos</a></li>
+                    <li><a href="criar_colecao.html">Criar coleção</a></li>
+                    <li><a href="criar_eventos.html">Criar evento</a></li>
+
+                </ul>
+            </nav>
+
+            <form class="search-bar" action="resultados.html" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar" required>
+                <button type="submit">Buscar</button>
+                <div class="login-header"><a href="login.html">Login</a></div>
+            </form>
+        </div>
+
+    </header>
+ 
+  <main id="main-holder">
+    <h1 id="login-header">Signup</h1>
+    <h1><a href="login.html">Login <a></h1>
+    
+    <div id="signup-error-msg-holder">
+      <p id="signup-error-msg">Invalid username <span id="serror-msg-second-line">and/or password</span></p>
+    </div>
+    
+    <form id="signup-form">
+      <input type="text" name="newname" id="username-field" class="signup-form-field" placeholder="Username">
+      <input type="password" name="newpass" id="password-field" class="signup-form-field" placeholder="Password">
+      <input type="submit" value="signup" id="signup-form-submit">
+    </form>
+  
+  </main>
+</body>
+
+</html>

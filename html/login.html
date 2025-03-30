@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script defer src="../js/login-sign-page.js"></script>
+</head>
+
+<body>
+      <!-- Nome da página na parte superior -->
+      <div class="nome-pagina">
+        <h1>Book Collectors</h1>
+    </div>
+
+    <!-- Barra de Navegação logo abaixo -->
+    <header>
+        <div class="contentor">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Ínicio</a></li>
+                    <li><a href="collections.html">Coleções</a></li>
+                    <li><a href="eventos.html">Eventos</a></li>
+                    <li><a href="criar_colecao.html">Criar coleção</a></li>
+                    <li><a href="criar_eventos.html">Criar evento</a></li>
+
+                </ul>
+            </nav>
+
+            <form class="search-bar" action="resultados.html" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar" required>
+                <button type="submit">Buscar</button>
+                <div class="login-header"><a href="login.html">Login</a></div>
+            </form>
+        </div>
+
+    </header>
+
+  <main id="main-holder">
+    <h1>Login</h1>
+    <h1><a href="signup.html">Signup <a></div></h1>
+    
+    <div id="login-error-msg-holder"> 
+      <p id="login-error-msg">Username e/ou <span id="lerror-msg-second-line">password inválida</span></p>
+    </div>
+    
+    <form id="login-form">
+      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
+      <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+      <input type="submit" value="Login" id="login-form-submit">
+    </form>
+  
+  </main>
+</body>
+
+</html>

@@ -10,6 +10,11 @@
 </head>
 
 <body>
+        <!-- Nome da página na parte superior -->
+     <div class="nome-pagina">
+         <h1>Book Collectors</h1>
+    </div>
+
     <header>
         <div class="contentor">
             <nav>
@@ -21,6 +26,11 @@
                     <li><a href="criar_eventos.html">Criar evento</a></li>
                 </ul>
             </nav>
+            <form class="search-bar" action="resultados.html" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar">
+                <button type="submit">Buscar</button>
+                <div class="login-header"><a href="login.html">Login</a></div>
+            </form>
         </div>
     </header>
 
@@ -28,6 +38,7 @@
         <div class="search-container">
             <h2>Resultados da Pesquisa</h2>
             <ul class="result-list" id="result-list"></ul>
+            
             <p id="no-results" style="display: none;">Nenhum resultado encontrado.</p>
         </div>
     </main>
