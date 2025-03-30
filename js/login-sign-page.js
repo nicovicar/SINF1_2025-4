@@ -14,7 +14,7 @@ if (signButton){
         const newname = signForm.newname.value;
         const newpass = signForm.newpass.value;
         if (newname === null || newpass === null){
-            alert("erro");
+            alert("Erro");
             signupErrorMsg.style.opacity = 1;
         }
         else if (nomes.includes(newname) || pass.includes(newpass)){
@@ -37,11 +37,11 @@ if(loginButton){
         if (nomes.includes(username) && pass.includes(password)) {
             alert("You have successfully logged in.");
             location.href="index.html";
-        } /*else if (username !== null && password !== null) {
-            alert("no no noaa");
-        }*/
+        } else if (username !== null && password !== null) {
+            alert("Erro");
+        }
         else {
-            alert("erro");
+            alert("Erro");
             loginErrorMsg.style.opacity = 1;
         }
     })
