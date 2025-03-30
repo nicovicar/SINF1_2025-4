@@ -13,7 +13,8 @@
   
   /* Fundo e texto */
   body {
-    background-color: #FDF5E6; 
+    /*background-color: #FDF5E6; */
+    background-color: #f7fff5;
     color: #000;              
   }
   
@@ -21,7 +22,8 @@
   .nome-pagina {
     text-align: center;       /* Centraliza o título */
     padding: 1rem;
-    background-color: #fff;   
+    color: white;
+    background-color: #274060;   
     border-bottom: 1px solid #ddd;
   }
   
@@ -44,7 +46,7 @@
   
   /* Contêiner flexível (para centralizar ou limitar a largura) */
   header .contentor {
-    background-color: #c26d0c;
+    background-color: #6EA4BF;
     margin: 0 auto;
     padding: 0 1rem;
     padding-top: 0.5%;
@@ -126,7 +128,7 @@
   
   /* ---- Imagem Grande ---- */
   .contentor-cinza {
-    background-color: #4a4141;  
+    background-color: #bdd6d0;  
     max-width: 800px;        
     margin: 4rem auto;
     padding: 1rem;           /* Espaço interno */
@@ -215,40 +217,40 @@ h3 a:hover{
   color: #333; /* Muda levemente a cor quando passa o mouse */ 
 }
 
-  /* ---- PaginaItem ---- */
+/* ---- PaginaItem ---- */
 
-        .book-container {
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            text-align: left;
-            gap: 20px;
-            padding: 20px;
-        }
+.book-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 20px;
+  padding: 20px;
+}
 
-        .book-container img {
-            width: 45%;
-            max-width: 400px;
-        }
+.book-container img {
+  width: 45%;
+  max-width: 400px;
+}
 
-        .book-info {
-            max-width: 700px;
-        }
+.book-info {
+   max-width: 700px;
+}
 
-        .book-info p {
-            text-align: justify;
-        }
+.book-info p {
+  text-align: justify;
+}
 
-        .btn-colecao {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #e66c08;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+.btn-colecao {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #274060;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
 
   /* ---- pagina pesquisa ---- */
 
@@ -288,7 +290,7 @@ h3 a:hover{
     left: 0;
     width: 100%;
     height: 50px;
-    background-color: #c26d0c;
+    background-color: #274060;
     color: #fff;
     text-align: center;
     line-height: 50px;
