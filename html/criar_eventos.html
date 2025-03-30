@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Book Collectors</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <div class="nome-pagina">
+    <h1>Book Collectors</h1>
+  </div>
+
+  <header>
+    <div class="contentor">
+        <nav>
+            <ul>
+                <li><a href="index.html">Ínicio</a></li>
+                <li><a href="collections.html">Coleções</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="criar_colecao.html">Criar coleção</a></li>
+                <li><a href="criar_eventos.html">Criar evento</a></li>
+
+            </ul>
+        </nav>
+
+        <form class="search-bar" action="resultados.html" method="GET">
+            <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar" required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Criar Novo Evento</h2>
+      <form id="eventForm">
+        <div class="form-group">
+          <label for="eventImage">Imagem do Evento:</label>
+          <input type="file" id="eventImage" name="eventImage" accept="image/*" required>
+        </div>
+        <div class="form-group">
+          <label for="title">Título:</label>
+          <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+          <label for="date">Data:</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="time">Horário:</label>
+          <input type="text" id="time" name="time" placeholder="Ex: 15h às 18h" required>
+        </div>
+        <div class="form-group">
+          <label for="location">Local:</label>
+          <input type="text" id="location" name="location" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Descrição:</label>
+          <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+        <button type="submit">Criar Evento</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>The Book Collectors</p>
+  </footer>
+
+  <script src="../js/event_script.js"></script>
+</body>
+</html>
