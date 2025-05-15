@@ -216,6 +216,55 @@ h3 a:hover{
   color: #333; /* Muda levemente a cor quando passa o mouse */ 
 }
 
+  /* ---- PaginaMinhasColeções ---- */
+  
+  .my-collections h1{
+    font-size: 1.5rem;
+  }
+
+h3 a{
+  text-decoration: none;
+  color: #000;
+}
+h3 a:hover{
+  color: #333; /* Muda levemente a cor quando passa o mouse */ 
+}
+
+/* ---- Perfil ---- */
+
+.profile-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 20px;
+  padding: 20px;
+}
+
+.profile-container img { /*caso haja*/
+  width: 45%;
+  max-width: 400px;
+}
+
+.profile-info {
+   max-width: 700px;
+}
+
+.profile-info p {
+  text-align: justify;
+}
+
+.btn-minhas-colecao {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #274060;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
 /* ---- PaginaItem ---- */
 
 .book-container {
