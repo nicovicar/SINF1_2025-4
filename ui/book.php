@@ -1,3 +1,79 @@
 <?php
 require_once("../dsl/connection.php");
 ?>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Book Collectors</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+    <div class="nome-pagina">
+        <h1>The Book Collectors</h1>
+    </div>
+
+    <header>
+        <div class="contentor">
+            <nav>
+                <ul>
+                    <li><a href="index.php">Ínicio</a></li>
+                    <li><a href="collections.php">Coleções</a></li>
+                    <li><a href="eventos.php">Eventos</a></li>
+                    <li><a href="criar_colecao.php">Criar coleção</a></li>
+                    <li><a href="criar_eventos.php">Criar evento</a></li>
+                </ul>
+            </nav>
+
+            <form class="search-bar" action="resultados.php" method="GET">
+                <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar">
+                <button type="submit">Buscar</button>
+                <div class="login-header"><a href="login.php">Login</a></div>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <div class="collection-name">
+            <h1>Livros</h1>
+        </div>
+
+        <?php
+        $sql = "SELECT * FROM books ORDER BY id DESC";
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<section class="book-container">';
+                echo '  <img src="' . htmlspecialchars($row["image"]) . '" alt="Capa do Livro">';
+                echo '  <div class="book-info">';
+                echo '    <h3>' . htmlspecialchars($row["title"]) . '</h3>';
+                echo '    <p><strong>Autor:</strong> ' . htmlspecialchars($row["author"]) . '</p>';
+                echo '    <p><strong>Ano de edição:</strong> ' . htmlspecialchars($row["year"]) . '</p>';
+                echo '    <p><strong>Editor:</strong> ' . htmlspecialchars($row["editor"]) . '</p>';
+                echo '    <p><strong>Idioma:</strong> ' . htmlspecialchars($row["language"]) . '</p>';
+                echo '    <p><strong>Peso:</strong> ' . htmlspecialchars($row["weight"]) . '</p>';
+                echo '    <p><strong>Encadernação:</strong> ' . htmlspecialchars($row["binding"]) . '</p>';
+                echo '    <p><strong>Páginas:</strong> ' . htmlspecialchars($row["pages"]) . '</p>';
+                echo '    <p><strong>Preço:</strong> €' . number_format($row["price"], 2, ',', '.') . '</p>';
+                echo '    <p><strong>Data de aquisição:</strong> ' . htmlspecialchars($row["date_of_acquisition"]) . '</p>';
+                echo '    <p><strong>Importância:</strong> ' . htmlspecialchars($row["importance"]) . '</p>';
+                echo '    <p><strong>Descrição:</strong> ' . nl2br(htmlspecialchars($row["description"])) . '</p>';
+                echo '  </div>';
+                echo '</section>';
+            }
+        } else {
+            echo '<p style="text-align:center">Nenhum livro encontrado.</p>';
+        }
+
+        $conn->close();
+        ?>
+    </main>
+
+    <footer>
+        <p>The Book Collectors</p>
+    </footer>
+</body>
+</html>
