@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
   <main id="main-holder">
     <h1 id="login-header">Signup</h1>
-    <h1><a href="perform-login.php">Login <a></h1>
+    <h1><a href="perform_login.php">Login <a></h1>
     
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <div id="signup-form">
