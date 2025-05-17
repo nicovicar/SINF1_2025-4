@@ -5,22 +5,25 @@ session_start();
 
 function checkUser($conn, $username, $password) {
     $sql = "SELECT id, username, password FROM users WHERE username = ?";
-    $stmt = $conn->existUser($username);
-    if ($stmt != null) {
-        // Bind result variables
-        $stmt->bind_result($username,$stored);
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
 
-        if (fetch($stmt)) {
-            if (password_verify($password, $stored)) {
-                return True;
-            }else{
-                return False;
+        // Verifica se usuário existe
+        if ($stmt->num_rows === 1) {
+            $stmt->bind_result($id, $fetched_username, $hashed_password); //trabalhar na cena do fetched
+            $stmt->fetch();
+
+            // Verifica senha
+            if (password_verify($password, $hashed_password)) {
+                return true;
             }
-        } else {
-            return False;
         }
-    } else {
-        return False;
+        $stmt->close();
     }
+
+    return false;
 }
+
 ?>

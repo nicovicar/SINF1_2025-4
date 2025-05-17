@@ -493,3 +493,13 @@ h3 a:hover{
 #main-holder h1 a:hover{
   color: #333; 
 }
+
+.invalid_feedback {
+  color:red;
+  font: size 12px;
+}
+
+.is-invalid {
+  border: 2px solid #e74c3c;
+  background-color: #fcebea;
+}
