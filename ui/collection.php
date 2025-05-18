@@ -1,5 +1,6 @@
 <?php
 require_once("../bll/load_collection.php");
+session_start();
 
 if (!isset($_GET['id'])) {
     die("Coleção não especificada.");
@@ -51,6 +52,27 @@ $livros_result = $dados['books'];
     </header>
 
 <main>
+
+    <?php
+    // Botão "Editar Coleção" visível apenas para o dono da coleção logado
+    if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true ) {
+        require_once("../dsl/connection.php"); // conexão para buscar ID
+        $username = $_SESSION["username"];
+
+        $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->bind_result($user_id);
+        $stmt->fetch();
+
+        if ($user_id === $colecao['user_id']) {
+            echo '<div style="text-align:right; margin: 1rem 2rem 0 0;">';
+            echo '  <a href="edit_collection.php?id=' . $colecao['id'] . '" class="btn-colecao">Editar Coleção</a>';
+            echo '</div>';
+        }
+    }
+    ?>
+
     <section class="bloco-lateral">
         <div class="bloco-imagem">
             <img src="<?php echo htmlspecialchars($colecao['image_path']); ?>" alt="Imagem da coleção" style="max-width: 300px;">
@@ -97,3 +119,4 @@ $livros_result = $dados['books'];
 </footer>
 </body>
 </html>
+
