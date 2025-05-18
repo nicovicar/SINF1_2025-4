@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))) {
         $username_err = "Username can only contain letters, numbers, and underscores.";
     } else {
-        if ($conn->existUser($username)) {
+        if (existUser($conn, $username)) {
             $username_err = "This username is already taken.";
         } else {
             $username = trim($_POST["username"]);
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check input errors before inserting in database
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
-        $conn->registerUser($username, $password);
+        registerUser($conn, $username, $password);
     }
 
 }
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="../css/styles.css">
-  <script defer src="../js/login-sign-page.js"></script>
+  <!--<script defer src="../js/login-sign-page.js"></script>-->
 </head>
 
 <body>
@@ -72,9 +72,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <nav>
                 <ul>
                     <li><a href="index.html">Ínicio</a></li>
-                    <li><a href="collections.html">Coleções</a></li>
+                    <li><a href="collections.php">Coleções</a></li>
                     <li><a href="eventos.html">Eventos</a></li>
-                    <li><a href="criar_colecao.html">Criar coleção</a></li>
+                    <li><a href="create_collections.php">Criar coleção</a></li>
                     <li><a href="criar_eventos.html">Criar evento</a></li>
 
                 </ul>
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form class="search-bar" action="resultados.html" method="GET">
                 <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar" required>
                 <button type="submit">Buscar</button>
-                <div class="login-header"><a href="login.html">Login</a></div>
+                <div class="login-header"><a href="perform_login.php">Login</a></div>
             </form>
         </div>
 
@@ -91,18 +91,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
   <main id="main-holder">
     <h1 id="login-header">Signup</h1>
-    <h1><a href="login.html">Login <a></h1>
+    <h1><a href="perform_login.php">Login <a></h1>
     
-    <div id="signup-error-msg-holder">
-      <p id="signup-error-msg">Invalid username <span id="serror-msg-second-line">and/or password</span></p>
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <div id="signup-form">
+        <input type="text" name="username" class="signup-form-field <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" placeholder="Username" value="<?php echo htmlspecialchars($username); ?>">
+        <span class="invalid-feedback"><?php echo $username_err; ?></span>
     </div>
+
+    <div>
+        <input type="password" name="password" class="signup-form-field <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" placeholder="Password" value="<?php echo htmlspecialchars($password); ?>">
+        <span class="invalid-feedback"><?php echo $password_err; ?></span>
+    </div>
+
+    <div>
+        <input type="password" name="confirm_password" class="signup-form-field <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" placeholder="Confirm Password" value="<?php echo htmlspecialchars($confirm_password); ?>">
+        <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
+    </div>
+
+    <input type="submit" value="Submit" id="signup-form-submit"> 
+</form>
+
     
-    <form id="signup-form">
-      <input type="text" name="newname" id="username-field" class="signup-form-field" placeholder="Username">
-      <input type="password" name="newpass" id="password-field" class="signup-form-field" placeholder="Password">
-      <input type="submit" value="signup" id="signup-form-submit">
-    </form>
-  
   </main>
   <footer>
     <p>The Book Collectors</p>

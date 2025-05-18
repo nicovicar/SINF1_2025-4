@@ -1,3 +1,68 @@
+<?php
+// Initialize the session
+if (!isset($_SESSION)) {
+    session_start();
+}
+//include dal file
+require_once ("../bll/handle_login.php");
+
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    header("location: profile.php");
+    exit;
+}
+
+// Define variables and initialize with empty values
+$username = $password = "";
+$username_err = $password_err = $login_err = "";
+
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Check if username is empty
+    if (empty(trim($_POST["username"]))) {
+        $username_err = "Please enter username.";
+    } else {
+        $username = trim($_POST["username"]);
+    }
+
+    // Check if password is empty
+    if (empty(trim($_POST["password"]))) {
+        $password_err = "Please enter your password.";
+    } else {
+        $password = trim($_POST["password"]);
+    }
+
+    // Validate credentials
+    if (empty($username_err) && empty($password_err)) {
+        // Prepare a select statement
+        if (checkUser($conn, $username, $password)) {
+            // Password is correct, so start a new session
+            print("triste");
+
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            // Store data in session variables
+            $_SESSION["loggedin"] = true;
+            //$_SESSION["id"] = $id;
+            $_SESSION["username"] = $username;
+            
+            // Redirect user to welcome page
+            header("location: profile.php");
+            
+        } else {
+            // Username doesn't exist, display a generic error message
+
+            $login_err = "Invalid username or password.";
+        }
+    } else {
+        // Username doesn't exist, display a generic error message
+        $login_err = "Invalid username or password.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -6,7 +71,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="../css/styles.css">
-  <script defer src="../js/login-sign-page.js"></script>
 </head>
 
 <body>
@@ -21,9 +85,9 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Ínicio</a></li>
-                    <li><a href="collections.html">Coleções</a></li>
+                    <li><a href="collections.php">Coleções</a></li>
                     <li><a href="eventos.html">Eventos</a></li>
-                    <li><a href="criar_colecao.html">Criar coleção</a></li>
+                    <li><a href="create_collections.php">Criar coleção</a></li>
                     <li><a href="criar_eventos.html">Criar evento</a></li>
 
                 </ul>
@@ -32,7 +96,7 @@
             <form class="search-bar" action="resultados.html" method="GET">
                 <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar" required>
                 <button type="submit">Buscar</button>
-                <div class="login-header"><a href="login.html">Login</a></div>
+                <div class="login-header"><a href="perform_login.php">Login</a></div>
             </form>
         </div>
 
@@ -40,18 +104,21 @@
 
   <main id="main-holder">
     <h1>Login</h1>
-    <h1><a href="signup.html">Signup <a></div></h1>
+    <h1><a href="register.php">Signup <a></div></h1>
     
-    <div id="login-error-msg-holder"> 
-      <p id="login-error-msg">Username e/ou <span id="lerror-msg-second-line">password inválida</span></p>
-    </div>
-    
-    <form id="login-form">
-      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
-      <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <div id="login-form">
+        <input type="text" name="username" class="login-form-field <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" placeholder="Username" value="<?php echo $username; ?>">
+        <span class="invalid-feedback"><?php echo $username_err; ?></span>
+      </div>
+      <div>
+        <input type="password" name="password" class="login-form-field  <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" placeholder="Password">
+        <span class="invalid-feedback"><?php echo $password_err; ?></span>
+      </div>
+      
       <input type="submit" value="Login" id="login-form-submit">
     </form>
-  
+
   </main>
   <footer>
     <p>The Book Collectors</p>

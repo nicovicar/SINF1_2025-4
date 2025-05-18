@@ -3,12 +3,14 @@ require_once("../dsl/connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Book Collectors</title>
     <link rel="stylesheet" href="../css/styles.css" />
 </head>
+
 <body>
 
     <div class="nome-pagina">
@@ -54,17 +56,12 @@ require_once("../dsl/connection.php");
             while ($row = $result->fetch_assoc()) {
                 echo '<section class="bloco-lateral">';
                 echo '  <div class="bloco-imagem">';
-                echo '    <img src="' . htmlspecialchars($row["image_path"]) . '" alt="' . htmlspecialchars($row["title"]) . '">';
+                echo '    <a href="collection.php?id=' . $row['id'] . '">';
+                echo '      <img src="' . htmlspecialchars($row["image_path"]) . '" alt="' . htmlspecialchars($row["title"]) . '">';
+                echo '    </a>';
                 echo '  </div>';
                 echo '  <div class="bloco-info">';
                 echo '    <h3>' . htmlspecialchars($row["title"]) . '</h3>';
-                echo '    <p><strong>Autor:</strong> ' . htmlspecialchars($row["author"]) . '</p>';
-                echo '    <p><strong>Ano de edição:</strong> ' . htmlspecialchars($row["year_edition"]) . '</p>';
-                echo '    <p><strong>Editor:</strong> ' . htmlspecialchars($row["editor"]) . '</p>';
-                echo '    <p><strong>Idioma:</strong> ' . htmlspecialchars($row["language"]) . '</p>';
-                echo '    <p><strong>Dimensões:</strong> ' . htmlspecialchars($row["dimensions"]) . '</p>';
-                echo '    <p><strong>Encadernação:</strong> ' . htmlspecialchars($row["binding"]) . '</p>';
-                echo '    <p><strong>Páginas:</strong> ' . htmlspecialchars($row["pages"]) . '</p>';
                 echo '    <p><strong>Descrição: </strong>' . nl2br(htmlspecialchars($row["description"])) . '</p>';
                 echo '  </div>';
                 echo '</section>';
@@ -81,4 +78,5 @@ require_once("../dsl/connection.php");
         <p>The Book Collectors</p>
     </footer>
 </body>
+
 </html>

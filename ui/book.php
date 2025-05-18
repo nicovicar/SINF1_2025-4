@@ -1,5 +1,16 @@
 <?php
 require_once("../dsl/connection.php");
+
+// 1) ID do livro vindo por GET, ex: book.php?id=3
+$book_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+// 2) Busca segura (prepared statement)
+$stmt = $conn->prepare("SELECT * FROM books WHERE id = ?");
+$stmt->bind_param("i", $book_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$book   = $result->fetch_assoc();
+$stmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -22,7 +33,7 @@ require_once("../dsl/connection.php");
                     <li><a href="index.php">Ínicio</a></li>
                     <li><a href="collections.php">Coleções</a></li>
                     <li><a href="eventos.php">Eventos</a></li>
-                    <li><a href="criar_colecao.php">Criar coleção</a></li>
+                    <li><a href="create_collections.php">Criar coleção</a></li>
                     <li><a href="criar_eventos.php">Criar evento</a></li>
                 </ul>
             </nav>
@@ -30,46 +41,34 @@ require_once("../dsl/connection.php");
             <form class="search-bar" action="resultados.php" method="GET">
                 <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar">
                 <button type="submit">Buscar</button>
-                <div class="login-header"><a href="login.php">Login</a></div>
+                <div class="login-header"><a href="perform_login.php">Login</a></div>
             </form>
         </div>
     </header>
 
     <main>
-        <div class="collection-name">
-            <h1>Livros</h1>
-        </div>
-
-        <?php
-        $sql = "SELECT * FROM books ORDER BY id DESC";
-        $result = $conn->query($sql);
-
-        if ($result && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo '<section class="book-container">';
-                echo '  <img src="' . htmlspecialchars($row["image"]) . '" alt="Capa do Livro">';
-                echo '  <div class="book-info">';
-                echo '    <h3>' . htmlspecialchars($row["title"]) . '</h3>';
-                echo '    <p><strong>Autor:</strong> ' . htmlspecialchars($row["author"]) . '</p>';
-                echo '    <p><strong>Ano de edição:</strong> ' . htmlspecialchars($row["year"]) . '</p>';
-                echo '    <p><strong>Editor:</strong> ' . htmlspecialchars($row["editor"]) . '</p>';
-                echo '    <p><strong>Idioma:</strong> ' . htmlspecialchars($row["language"]) . '</p>';
-                echo '    <p><strong>Peso:</strong> ' . htmlspecialchars($row["weight"]) . '</p>';
-                echo '    <p><strong>Encadernação:</strong> ' . htmlspecialchars($row["binding"]) . '</p>';
-                echo '    <p><strong>Páginas:</strong> ' . htmlspecialchars($row["pages"]) . '</p>';
-                echo '    <p><strong>Preço:</strong> €' . number_format($row["price"], 2, ',', '.') . '</p>';
-                echo '    <p><strong>Data de aquisição:</strong> ' . htmlspecialchars($row["date_of_acquisition"]) . '</p>';
-                echo '    <p><strong>Importância:</strong> ' . htmlspecialchars($row["importance"]) . '</p>';
-                echo '    <p><strong>Descrição:</strong> ' . nl2br(htmlspecialchars($row["description"])) . '</p>';
-                echo '  </div>';
-                echo '</section>';
-            }
-        } else {
-            echo '<p style="text-align:center">Nenhum livro encontrado.</p>';
-        }
-
-        $conn->close();
-        ?>
+        <?php if ($book): ?>
+        <section class="book-container">
+            <img src="<?php echo htmlspecialchars($book['image']); ?>" alt="Capa do Livro" />
+            <div class="book-info">
+                <h3><?php echo htmlspecialchars($book['title']); ?></h3>
+                <p><strong>Autor:</strong> <?php echo htmlspecialchars($book['author']); ?></p>
+                <p><strong>Ano de edição:</strong> <?php echo htmlspecialchars($book['year']); ?></p>
+                <p><strong>Editor:</strong> <?php echo htmlspecialchars($book['editor']); ?></p>
+                <p><strong>Idioma:</strong> <?php echo htmlspecialchars($book['language']); ?></p>
+                <p><strong>Peso:</strong> <?php echo htmlspecialchars($book['weight']); ?></p>
+                <p><strong>Encadernação:</strong> <?php echo htmlspecialchars($book['binding']); ?></p>
+                <p><strong>Páginas:</strong> <?php echo htmlspecialchars($book['pages']); ?></p>
+                <p><strong>Preço:</strong> €<?php echo number_format($book['price'], 2, ',', '.'); ?></p>
+                <p><strong>Data de aquisição:</strong> <?php echo htmlspecialchars($book['date_of_acquisition']); ?></p>
+                <p><strong>Importância:</strong> <?php echo htmlspecialchars($book['importance']); ?></p>
+                <p><strong>Descrição: </strong><?php echo nl2br(htmlspecialchars($book['description'])); ?></p>
+                <a href="collections.php" class="btn-colecao">Voltar às Coleções</a>
+            </div>
+        </section>
+        <?php else: ?>
+            <p style="text-align:center;">Livro não encontrado.</p>
+        <?php endif; ?>
     </main>
 
     <footer>
@@ -77,3 +76,4 @@ require_once("../dsl/connection.php");
     </footer>
 </body>
 </html>
+<?php $conn->close(); ?>
