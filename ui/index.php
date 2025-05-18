@@ -61,7 +61,7 @@ $event = $event_result->fetch_assoc();
             <form class="search-bar" action="resultados.php" method="GET">
                 <input type="text" name="q" placeholder="Pesquisar..." required>
                 <button type="submit">Buscar</button>
-                <div class="login-header"><a href="performlogin.php">Login</a></div>
+                <div class="login-header"><a href="perform_login.php">Login</a></div>
             </form>
         </div>
     </header>
