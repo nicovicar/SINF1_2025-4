@@ -1,7 +1,9 @@
 <?php
 require_once("../dsl/connection.php");
 
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 function checkUser($conn, $username, $password) {
     $sql = "SELECT username, password FROM users WHERE username = ?";
@@ -15,7 +17,7 @@ function checkUser($conn, $username, $password) {
             $stmt->bind_result($fetched_username, $hashed_password);
             $stmt->fetch();
 
-            if (password_verify($password, $hashed_password)) {
+            if (strcmp($password, $hashed_password) == 0) {
                 return true;
             }
         }

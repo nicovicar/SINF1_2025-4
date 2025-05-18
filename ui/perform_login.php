@@ -1,6 +1,8 @@
 <?php
 // Initialize the session
-
+if (!isset($_SESSION)) {
+    session_start();
+}
 //include dal file
 require_once ("../bll/handle_login.php");
 
@@ -34,9 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
         // Prepare a select statement
-        
         if (checkUser($conn, $username, $password)) {
             // Password is correct, so start a new session
+            print("triste");
+
             if (!isset($_SESSION)) {
                 session_start();
             }
@@ -47,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             // Redirect user to welcome page
             header("location: profile.php");
+            
         } else {
             // Username doesn't exist, display a generic error message
 
