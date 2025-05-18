@@ -29,27 +29,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <h1>The Book Collectors</h1>
     </div>
 
-    <header>
-        <div class="contentor">
-            <nav>
-                <ul>
-                    <li><a href="index.html">Ínicio</a></li>
-                    <li><a href="collections.php">Coleções</a></li>
-                    <li><a href="eventos.html">Eventos</a></li>
-                    <li><a href="create_collections.php">Criar coleção</a></li>
-                    <li><a href="criar_eventos.html">Criar evento</a></li>
-                </ul>
-            </nav>
-
-            <form class="search-bar" action="resultados.html" method="GET">
-                <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar">
-                <button type="submit">Buscar</button>
-                <div class="login-header">
-                    <a href="perform_login.php">Login</a>
-                    </div>
-            </form>
-        </div>
-    </header>
+    <?php include "header.php"; ?>
 
     <main>
         <section class="profile-container">
@@ -84,13 +64,44 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         echo '</section>';
                 }
                 } else {
-                echo '<p style="text-align:center">Nenhuma coleção encontrada.</p>';
+                    echo '<p style="text-align:center">Nenhuma coleção encontrada.</p>';
                 }
-
-                $conn->close();
                 ?>
 
             </div>
+        </section>
+        <section class="bloco-lateral">
+            <div class="meus-eventos-info">
+                <h3>Os meus eventos</h3>
+
+                <?php
+                $user_id = $array1["id"];
+                $sql = "SELECT * FROM events WHERE user_id = $user_id ORDER BY id DESC";
+                $result = $conn->query($sql);
+
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<section class="bloco-lateral">';
+                        echo '  <div class="bloco-imagem">';
+                        echo '    <a href="events.php?id=' . $row['id'] . '">';
+                        echo '      <img src="' . htmlspecialchars($row["image_path"]) . '" alt="' . htmlspecialchars($row["title"]) . '">';
+                        echo '    </a>';
+                        echo '  </div>';
+                        echo '  <div class="bloco-info">';
+                        echo '    <h3>' . htmlspecialchars($row["title"]) . '</h3>';
+                        echo '    <p><strong>Descrição: </strong>' . nl2br(htmlspecialchars($row["description"])) . '</p>';
+                        echo '  </div>';
+                        echo '</section>';
+                }
+                } else {
+                    echo '<p style="text-align:center">Nenhum evento encontrado.</p>';
+                }
+                ?>
+
+            </div>
+        </section>
+        <section class="bloco-lateral">
+            <a href="edit_profile.php"><button class="btn-editar-perfil">Editar perfil</button></a>   
         </section>
     </main>
 

@@ -80,27 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <!-- Barra de Navegação logo abaixo -->
-    <header>
-        <div class="contentor">
-            <nav>
-                <ul>
-                    <li><a href="index.html">Ínicio</a></li>
-                    <li><a href="collections.php">Coleções</a></li>
-                    <li><a href="eventos.html">Eventos</a></li>
-                    <li><a href="create_collections.php">Criar coleção</a></li>
-                    <li><a href="criar_eventos.html">Criar evento</a></li>
-
-                </ul>
-            </nav>
-
-            <form class="search-bar" action="resultados.html" method="GET">
-                <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar" required>
-                <button type="submit">Buscar</button>
-                <div class="login-header"><a href="perform_login.php">Login</a></div>
-            </form>
-        </div>
-
-    </header>
+    <?php include "header.php"; ?>
 
   <main id="main-holder">
     <h1>Login</h1>

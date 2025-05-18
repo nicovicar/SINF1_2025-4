@@ -1,3 +1,11 @@
+<?php
+// Initialize the session
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -11,24 +19,7 @@
     <h1>The Book Collectors</h1>
   </div>
 
-  <header>
-    <div class="contentor">
-      <nav>
-        <ul>
-          <li><a href="index.php">Ínicio</a></li>
-          <li><a href="collections.php">Coleções</a></li>
-          <li><a href="events.php">Eventos</a></li>
-          <li><a href="create_collections.php">Criar coleção</a></li>
-          <li><a href="create_events.php">Criar evento</a></li>
-        </ul>
-      </nav>
-      <form class="search-bar" action="resultados.php" method="GET">
-        <input type="text" name="q" placeholder="Pesquisar..." required>
-        <button type="submit">Buscar</button>
-        <div class="login-header"><a href="perform_login.php">Login</a></div>
-      </form>
-    </div>
-  </header>
+  <?php include "header.php"; ?>
 
   <main>
     <section>

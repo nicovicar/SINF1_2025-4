@@ -5,6 +5,11 @@ require_once("../bll/handle_register.php");
 $username = $password = $email = $dataNascimento = $confirm_password = "";
 $username_err = $password_err = $email_err = $dataNascimento_err =  $confirm_password_err = "";
 
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    header("location: profile.php");
+    exit;
+}
+
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -20,12 +25,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = trim($_POST["username"]);
         }
     }
+    
+    // Validate data de nascimento
+     if (empty(trim($_POST["dataNascimento"]))) {
+       $dataNascimento_err = "Please enter a date.";
+    } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', trim($_POST["dataNascimento"]))) {
+       $dataNascimento_err = "Date can only contain numbers and underscores.";
+    } else {
+        $dataNascimento = trim($_POST["dataNascimento"]);
+    }
+
 
     // Validate email
     if (empty(trim($_POST["email"]))) {
-        $username_err = "Please enter an email.";
-    } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["email"]))) {
-        $username_err = "email can only contain letters, numbers, and underscores.";
+        $email_err = "Please enter an email.";
+    } elseif (!preg_match('/^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+$/', trim($_POST["email"]))) {
+        $email_err = "email can only contain letters, numbers, and underscores.";
     } else {
         if (existUser($conn, $email)) {
             $email_err = "This email is already taken.";
@@ -81,52 +96,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <!-- Barra de Navegação logo abaixo -->
-    <header>
-        <div class="contentor">
-            <nav>
-                <ul>
-                    <li><a href="index.html">Ínicio</a></li>
-                    <li><a href="collections.php">Coleções</a></li>
-                    <li><a href="eventos.html">Eventos</a></li>
-                    <li><a href="create_collections.php">Criar coleção</a></li>
-                    <li><a href="criar_eventos.html">Criar evento</a></li>
-
-                </ul>
-            </nav>
-
-            <form class="search-bar" action="resultados.html" method="GET">
-                <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar" required>
-                <button type="submit">Buscar</button>
-                <div class="login-header"><a href="perform_login.php">Login</a></div>
-            </form>
-        </div>
-
-    </header>
+    <?php include "header.php"; ?>
  
   <main id="main-holder">
     <h1 id="login-header">Signup</h1>
     <h1><a href="perform_login.php">Login <a></h1>
     
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-    <div id="signup-form">
-        <input type="text" name="username" class="signup-form-field <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" placeholder="Username" value="<?php echo htmlspecialchars($username); ?>">
-        <span class="invalid-feedback"><?php echo $username_err; ?></span>
-    </div>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <div id="signup-form">
+            <input type="text" name="username" class="signup-form-field <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" placeholder="Username" value="<?php echo htmlspecialchars($username); ?>">
+            <span class="invalid-feedback"><?php echo $username_err; ?></span>
+        </div>
 
-    <div>
-        <input type="password" name="password" class="signup-form-field <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" placeholder="Password" value="<?php echo htmlspecialchars($password); ?>">
-        <span class="invalid-feedback"><?php echo $password_err; ?></span>
-    </div>
+        <div>
+            <input type="date" name="dataNascimento" class="signup-form-field <?php echo (!empty($dataNascimento_err)) ? 'is-invalid' : ''; ?>" placeholder="Data de Nascimento" value="<?php echo htmlspecialchars($dataNascimento); ?>">
+            <span class="invalid-feedback"><?php echo $dataNascimento_err; ?></span>
+        </div>
 
-    <div>
-        <input type="password" name="confirm_password" class="signup-form-field <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" placeholder="Confirm Password" value="<?php echo htmlspecialchars($confirm_password); ?>">
-        <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
-    </div>
+        <div>
+            <input type="text" name="email" class="signup-form-field <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>">
+            <span class="invalid-feedback"><?php echo $email_err; ?></span>
+        </div>
 
-    <input type="submit" value="Submit" id="signup-form-submit"> 
-</form>
+        <div>
+            <input type="password" name="password" class="signup-form-field <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" placeholder="Password" value="<?php echo htmlspecialchars($password); ?>">
+            <span class="invalid-feedback"><?php echo $password_err; ?></span>
+        </div>
 
-    
+        <div>
+            <input type="password" name="confirm_password" class="signup-form-field <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" placeholder="Confirm Password" value="<?php echo htmlspecialchars($confirm_password); ?>">
+            <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
+        </div>
+
+        <input type="submit" value="Submit" id="signup-form-submit"> 
+    </form>
   </main>
   <footer>
     <p>The Book Collectors</p>
