@@ -254,6 +254,13 @@ h3 a:hover{
   text-align: justify;
 }
 
+
+.profile-info h3 a {
+  font-size: 45px;
+  color: #274060;
+}
+
+
 .btn-minhas-colecao {
   display: inline-block;
   margin-top: 10px;
@@ -502,4 +509,22 @@ h3 a:hover{
 .is-invalid {
   border: 2px solid #e74c3c;
   background-color: #fcebea;
+}
+
+.minhas_colecoes {
+  font-size: 40px;
+  color:#274060;
+  font-weight: bold;
+}
+
+.user_name {
+  font-size: 45px;
+  color:#274060;
+  font-weight: bold;
+}
+
+.minhas-colecoes-info h3 {
+  margin-bottom: 0.5rem;
+  font-size: 25px;
+  color: #274060 ;
 }

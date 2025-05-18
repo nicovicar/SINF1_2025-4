@@ -1,11 +1,12 @@
 <?php
+
 require_once("../bll/handle_profile.php");
 
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: profile.php");
-    exit;
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+}else {
+    $array1 = getUser($conn, $_SESSION["username"]);
 }
-
 
 
 ?>
@@ -53,10 +54,42 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     <main>
         <section class="profile-container">
             <div class="profile-info">
-                <h3>User</h3> <!-- Mudar quando fizer o php -->
-                <p><strong>Email:</strong> </p>
-                </p>
-                <a href="minhascolecoes.html" class="btn-minhas-colecao">Ver As Minhas Coleções</a>
+                <h3><a> <?php echo ($_SESSION["username"]); ?> </a></h3>
+                <p><strong>Email: </strong> <?php echo ($array1["email"]); ?></p>
+                <p><strong>Data de nascimento: </strong><?php echo ($array1["dataNascimento"]); ?></p>
+            </div>
+        </section>
+
+        <section class="bloco-lateral">
+            <div class="minhas-colecoes-info">
+                <h3>As minhas Colecoes</h3>
+
+                <?php
+                $user_id = $array1["id"];
+                $sql = "SELECT * FROM collections WHERE user_id = $user_id ORDER BY id DESC";
+                $result = $conn->query($sql);
+
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<section class="bloco-lateral">';
+                        echo '  <div class="bloco-imagem">';
+                        echo '    <a href="collection.php?id=' . $row['id'] . '">';
+                        echo '      <img src="' . htmlspecialchars($row["image_path"]) . '" alt="' . htmlspecialchars($row["title"]) . '">';
+                        echo '    </a>';
+                        echo '  </div>';
+                        echo '  <div class="bloco-info">';
+                        echo '    <h3>' . htmlspecialchars($row["title"]) . '</h3>';
+                        echo '    <p><strong>Descrição: </strong>' . nl2br(htmlspecialchars($row["description"])) . '</p>';
+                        echo '  </div>';
+                        echo '</section>';
+                }
+                } else {
+                echo '<p style="text-align:center">Nenhuma coleção encontrada.</p>';
+                }
+
+                $conn->close();
+                ?>
+
             </div>
         </section>
     </main>
