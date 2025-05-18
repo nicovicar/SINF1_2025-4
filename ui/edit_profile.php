@@ -75,14 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $old_password = trim($_POST["old_password"]);
     if (empty($old_password)) {
         $old_password_err = "Please enter the old password.";
-    } elseif (strcmp($old_password, $array1['password'])) {
+    } elseif (!checkUser($conn, $username,$old_password)) {
         $old_password_err = "Old password incorrect.";
     }
 
-
     // Check input errors before inserting in database
     if (empty($username_err) && empty($password_err) && empty($dataNascimento_err)&& empty($email_err) && empty($confirm_password_err)) {
-        editUser($conn, $username, $password, $dataNascimento, $email);
+        editUser($conn,$array1['id'], $username, $password, $dataNascimento, $email);
         header("location:profile.php");
     }
 
