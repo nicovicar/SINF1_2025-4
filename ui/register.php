@@ -2,8 +2,8 @@
 require_once("../bll/handle_register.php");
 
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $password = $email = $dataNascimento = $confirm_password = "";
+$username_err = $password_err = $email_err = $dataNascimento_err =  $confirm_password_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,6 +18,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username_err = "This username is already taken.";
         } else {
             $username = trim($_POST["username"]);
+        }
+    }
+
+    // Validate email
+    if (empty(trim($_POST["email"]))) {
+        $username_err = "Please enter an email.";
+    } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["email"]))) {
+        $username_err = "email can only contain letters, numbers, and underscores.";
+    } else {
+        if (existUser($conn, $email)) {
+            $email_err = "This email is already taken.";
+        } else {
+            $email = trim($_POST["email"]);
         }
     }
 
@@ -41,8 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check input errors before inserting in database
-    if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
-        registerUser($conn, $username, $password);
+    if (empty($username_err) && empty($password_err) && empty($dataNascimento_err)&& empty($email_err) && empty($confirm_password_err)) {
+        registerUser($conn, $username, $password, $dataNascimento, $email);
         header("location:profile.php");
     }
 

@@ -3,7 +3,7 @@
 require_once("../bll/handle_profile.php");
 
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
+    header("location: perform_login.php");
 }else {
     $array1 = getUser($conn, $_SESSION["username"]);
 }
