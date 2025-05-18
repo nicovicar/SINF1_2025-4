@@ -85,9 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <nav>
                 <ul>
                     <li><a href="index.html">Ínicio</a></li>
-                    <li><a href="collections.html">Coleções</a></li>
+                    <li><a href="collections.php">Coleções</a></li>
                     <li><a href="eventos.html">Eventos</a></li>
-                    <li><a href="criar_colecao.html">Criar coleção</a></li>
+                    <li><a href="create_collections.php">Criar coleção</a></li>
                     <li><a href="criar_eventos.html">Criar evento</a></li>
 
                 </ul>
