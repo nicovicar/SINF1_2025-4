@@ -3,7 +3,7 @@ require_once("../dsl/connection.php");
 require_once("../dao/book_dao.php");
 
 session_start();
-$user_id = 1; // temporário até login estar ativo
+$user_id = 1; // temporário até login estar ativo 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dados = $_POST;
