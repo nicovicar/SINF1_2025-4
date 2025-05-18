@@ -39,9 +39,9 @@ if (!$book) {
         <ul>
           <li><a href="index.php">Ínicio</a></li>
           <li><a href="collections.php">Coleções</a></li>
-          <li><a href="eventos.php">Eventos</a></li>
+          <li><a href="events.php">Eventos</a></li>
           <li><a href="create_collections.php">Criar coleção</a></li>
-          <li><a href="criar_eventos.php">Criar evento</a></li>
+          <li><a href="create_events.php">Criar evento</a></li>
         </ul>
       </nav>
       <form class="search-bar" action="resultados.php" method="GET">
