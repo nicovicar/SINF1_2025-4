@@ -1,7 +1,5 @@
 <?php
-require_once("../bll/load_event.php");
 require_once("../dsl/connection.php");
-
 if (!isset($_SESSION)) session_start();
 
 if (!isset($_GET['id'])) {
@@ -9,17 +7,17 @@ if (!isset($_GET['id'])) {
 }
 
 $id = intval($_GET['id']);
-$evento = carregar_evento($id);
+$stmt = $conn->prepare("SELECT * FROM events WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$evento = $result->fetch_assoc();
 
 if (!$evento) {
     die("Evento não encontrado.");
 }
 
-// Verifica se o usuário está logado e é o dono do evento
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    die("Acesso negado.");
-}
-
+// Verifica se o usuário é o dono
 $username = $_SESSION["username"];
 $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
 $stmt->bind_param("s", $username);

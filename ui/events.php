@@ -2,12 +2,23 @@
 require_once("../dsl/connection.php");
 if (!isset($_SESSION)) session_start();
 
-$query = "SELECT * FROM events ORDER BY date DESC, time DESC";
-$result = mysqli_query($conn, $query);
-
-if (!$result) {
-    die("Erro ao buscar eventos: " . mysqli_error($conn));
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    die("Acesso negado.");
 }
+
+$username = $_SESSION["username"];
+$stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$stmt->bind_result($user_id);
+$stmt->fetch();
+$stmt->close();
+
+// Pega eventos do usuário
+$stmt = $conn->prepare("SELECT * FROM events WHERE user_id = ? ORDER BY date DESC");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -15,13 +26,12 @@ if (!$result) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eventos - The Book Collectors</title>
+    <title>Meus Eventos</title>
     <link rel="stylesheet" href="../css/styles.css" />
 </head>
-
 <body>
 <div class="nome-pagina">
-    <h1>Eventos</h1>
+    <h1>Meus Eventos</h1>
 </div>
 
 <?php include "header.php"; ?>
@@ -31,11 +41,11 @@ if (!$result) {
         <a href="create_event.php" class="btn-colecao">Criar Novo Evento</a>
     </div>
 
-    <h2 style="margin-left: 2rem">Lista de Eventos:</h2>
+    <h2 style="margin-left: 2rem">Seus Eventos:</h2>
 
     <?php
-    if (mysqli_num_rows($result) > 0) {
-        while ($evento = mysqli_fetch_assoc($result)) {
+    if ($result->num_rows > 0) {
+        while ($evento = $result->fetch_assoc()) {
             echo '<section class="bloco-lateral">';
             echo '  <div class="bloco-imagem">';
             if (!empty($evento['image_path'])) {
@@ -49,13 +59,14 @@ if (!$result) {
             echo '    <p><strong>Data:</strong> ' . htmlspecialchars($evento['date']) . '</p>';
             echo '    <p><strong>Hora:</strong> ' . htmlspecialchars($evento['time']) . '</p>';
             echo '    <p><strong>Local:</strong> ' . htmlspecialchars($evento['location']) . '</p>';
-            echo '    <p><strong>Descrição:</strong> ' . nl2br(htmlspecialchars($evento['description'])) . '</p>';
-            echo '    <a href="event.php?id=' . $evento['id'] . '" class="btn-colecao">Ver Detalhes</a>';
+            echo '    <p>' . nl2br(htmlspecialchars($evento['description'])) . '</p>';
+            echo '    <a href="edit_event.php?id=' . $evento['id'] . '" class="btn-colecao" style="margin-right: 10px;">Editar</a>';
+            echo '    <a href="../bll/delete_event.php?id=' . $evento['id'] . '" class="btn-colecao" onclick="return confirm(\'Deseja realmente deletar este evento?\');">Deletar</a>';
             echo '  </div>';
             echo '</section>';
         }
     } else {
-        echo "<p style='margin-left: 2rem'>Nenhum evento encontrado.</p>";
+        echo "<p style='margin-left: 2rem'>Você ainda não criou nenhum evento.</p>";
     }
     ?>
 </main>

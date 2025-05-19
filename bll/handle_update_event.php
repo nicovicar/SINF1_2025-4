@@ -1,7 +1,6 @@
 <?php
 require_once("../dsl/connection.php");
 require_once("../dsl/event_dao.php");
-require_once("../bll/load_event.php");
 
 if (!isset($_SESSION)) session_start();
 
@@ -13,7 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $location = trim($_POST['location']);
     $description = trim($_POST['description']);
 
-    $evento = carregar_evento($id);
+    // Carrega evento direto do DB
+    $stmt = $conn->prepare("SELECT * FROM events WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $evento = $result->fetch_assoc();
+
     if (!$evento) {
         die("Evento não encontrado.");
     }
