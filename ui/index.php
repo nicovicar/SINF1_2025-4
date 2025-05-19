@@ -1,15 +1,13 @@
 <?php
 require_once("../dsl/connection.php");
-// Initialize the session
 if (!isset($_SESSION)) {
     session_start();
 }
-// Buscar uma coleção aleatória
+
 $collection_sql = "SELECT * FROM collections ORDER BY RAND() LIMIT 1";
 $collection_result = $conn->query($collection_sql);
 $collection = $collection_result->fetch_assoc();
 
-// Buscar um livro da coleção selecionada
 $book = null;
 if ($collection) {
     $book_sql = "
@@ -26,7 +24,6 @@ if ($collection) {
     $stmt->close();
 }
 
-// Buscar um evento aleatório
 $event_sql = "SELECT * FROM events ORDER BY RAND() LIMIT 1";
 $event_result = $conn->query($event_sql);
 $event = $event_result->fetch_assoc();
@@ -43,20 +40,20 @@ $event = $event_result->fetch_assoc();
 
 <body>
 
-    <!-- Nome da página na parte superior -->
     <div class="nome-pagina">
         <h1> The Book Collectors</h1>
     </div>
 
-    <!-- Barra de Navegação -->
     <?php include "header.php"; ?>
 
-    <!-- Conteúdo Principal -->
     <main>
 
+        <!-- Título da coleção (ajustado com fonte maior) -->
+        <h2 style="text-align: center; margin-top: 2rem; font-size: 2.2rem;">Coleção em alta</h2>
+
         <!-- Imagem grande da coleção -->
-        <section class="contentor-cinza">
-            <div class="wrap-imagen">
+        <section class="contentor-cinza" style="padding: 2rem;">
+            <div class="wrap-imagen" style="max-width: 90%; margin: auto;">
                 <?php if ($collection): ?>
                     <img src="<?php echo htmlspecialchars($collection['image_path']); ?>" alt="<?php echo htmlspecialchars($collection['title']); ?>">
                 <?php else: ?>
@@ -65,9 +62,11 @@ $event = $event_result->fetch_assoc();
             </div>
         </section>
 
-        <!-- Livro aleatório da coleção -->
+        <!-- Subtítulo do livro -->
+        <h2 style="text-align: center; margin-top: 2rem;">Exemplar da Coleção</h2>
+
         <?php if ($book): ?>
-        <section class="bloco-lateral">
+        <section class="bloco-lateral" style="transform: scale(0.95);">
             <div class="bloco-imagem">
                 <img src="<?php echo htmlspecialchars($book['image']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>" />
             </div>
@@ -87,9 +86,11 @@ $event = $event_result->fetch_assoc();
         </section>
         <?php endif; ?>
 
-        <!-- Evento aleatório -->
+        <!-- Título do evento -->
+        <h2 style="text-align: center; margin-top: 2rem;">Evento em alta</h2>
+
         <?php if ($event): ?>
-        <section class="bloco-lateral">
+        <section class="bloco-lateral" style="transform: scale(0.95); margin-bottom: 3rem;">
             <div class="bloco-imagem">
                 <img src="<?php echo htmlspecialchars($event['image_path']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" />
             </div>
@@ -104,10 +105,8 @@ $event = $event_result->fetch_assoc();
             </div>
         </section>
         <?php endif; ?>
-
     </main>
 
-    <!-- Rodapé -->
     <footer>
         <p>The Book Collectors</p>
     </footer>
@@ -115,3 +114,7 @@ $event = $event_result->fetch_assoc();
 </html>
 
 <?php $conn->close(); ?>
+
+
+
+

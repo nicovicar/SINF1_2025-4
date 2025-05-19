@@ -5,12 +5,12 @@
     echo '<ul>';
     echo '<li><a href="index.php">Ínicio</a></li>';
     echo '<li><a href="collections.php">Coleções</a></li>';
-    echo '<li><a href="eventos.html">Eventos</a></li>';
+    echo '<li><a href="events.php">Eventos</a></li>';
     echo '<li><a href="create_collections.php">Criar coleção</a></li>';
-    echo '<li><a href="criar_eventos.html">Criar evento</a></li>';
+    echo '<li><a href="create_events.php">Criar evento</a></li>';
     echo '</ul>';
     echo '</nav>';
-    echo '<form class="search-bar" action="resultados.html" method="GET">';
+    echo '<form class="search-bar" action="search_results.php" method="GET">';
     echo '<input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar" required>';
     echo '<button type="submit">Buscar</button>';
     if (!isset($_SESSION) || !isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
