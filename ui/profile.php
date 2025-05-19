@@ -42,7 +42,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
         <section class="bloco-lateral">
             <div class="minhas-colecoes-info">
-                <h3>As minhas Colecoes</h3>
+                <h3>As minhas Coleções</h3>
 
                 <?php
                 $user_id = $array1["id"];
@@ -72,7 +72,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         </section>
         <section class="bloco-lateral">
             <div class="meus-eventos-info">
-                <h3>Os meus eventos</h3>
+                <h3>Os meus Eventos</h3>
 
                 <?php
                 $user_id = $array1["id"];
