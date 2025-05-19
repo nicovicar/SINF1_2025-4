@@ -11,21 +11,18 @@ $books = $collections = $events = [];
 if ($q !== "") {
     $term = "%{$q}%";
 
-    // Buscar livros
     $stmt = $conn->prepare("SELECT id, title FROM books WHERE title LIKE ?");
     $stmt->bind_param("s", $term);
     $stmt->execute();
     $books = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
 
-    // Buscar coleções
     $stmt = $conn->prepare("SELECT id, title FROM collections WHERE title LIKE ?");
     $stmt->bind_param("s", $term);
     $stmt->execute();
     $collections = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
 
-    // Buscar eventos
     $stmt = $conn->prepare("SELECT id, title FROM events WHERE title LIKE ?");
     $stmt->bind_param("s", $term);
     $stmt->execute();

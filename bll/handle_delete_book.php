@@ -8,7 +8,6 @@ if (!isset($_GET['id']) || !isset($_GET['collection_id'])) {
 $book_id = intval($_GET['id']);
 $collection_id = intval($_GET['collection_id']);
 
-// Deletar o livro da tabela books
 $stmt = $conn->prepare("DELETE FROM books WHERE id = ?");
 $stmt->bind_param("i", $book_id);
 

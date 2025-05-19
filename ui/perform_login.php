@@ -1,63 +1,49 @@
 <?php
-// Initialize the session
 if (!isset($_SESSION)) {
     session_start();
 }
 
 require_once ("../bll/handle_login.php");
 
-// Check if the user is already logged in, if yes then redirect him to welcome page
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     header("location: profile.php");
     exit;
 }
 
-// Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
 
-// Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Check if username is empty
     if (empty(trim($_POST["username"]))) {
         $username_err = "Please enter username.";
     } else {
         $username = trim($_POST["username"]);
     }
 
-    // Check if password is empty
     if (empty(trim($_POST["password"]))) {
         $password_err = "Please enter your password.";
     } else {
         $password = trim($_POST["password"]);
     }
 
-    // Validate credentials
     if (empty($username_err) && empty($password_err)) {
-        // Prepare a select statement
         if (checkUser($conn, $username, $password)) {
-            // Password is correct, so start a new session
             print("triste");
 
             if (!isset($_SESSION)) {
                 session_start();
             }
-            // Store data in session variables
             $_SESSION["loggedin"] = true;
-            //$_SESSION["id"] = $id;
             $_SESSION["username"] = $username;
             
-            // Redirect user to welcome page
             header("location: profile.php");
             
         } else {
-            // Username doesn't exist, display a generic error message
 
             $login_err = "Invalid username or password.";
         }
     } else {
-        // Username doesn't exist, display a generic error message
         $login_err = "Invalid username or password.";
     }
 }
@@ -74,12 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-      <!-- Nome da página na parte superior -->
       <div class="nome-pagina">
         <h1>The Book Collectors</h1>
     </div>
 
-    <!-- Barra de Navegação logo abaixo -->
     <?php include "header.php"; ?>
 
   <main id="main-holder">

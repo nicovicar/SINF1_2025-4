@@ -4,7 +4,6 @@ require_once("../bll/handle_profile.php");
 require_once("../bll/handle_login.php");
 require_once("../bll/handle_register.php");
 
-// Define variables and initialize with empty values
 
 $username_err = $password_err = $old_password_err = $email_err = $dataNascimento_err =  $confirm_password_err = "";
 
@@ -14,15 +13,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     $array1 = getUser($conn, $_SESSION["username"]);
 }
 
-// $username = $array1['username'];
 $email = $array1['email'];
 $dataNascimento = $array1['dataNascimento'];
 $old_password = $password = $confirm_password = "";
 
-// Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Verify old password
     $old_password = trim($_POST["old_password"]);
     if (empty($old_password)) {
         $old_password_err = "Please enter the old password.";
@@ -30,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $old_password_err = "Old password incorrect.";
     } else {
 
-        // Validate data de nascimento
         if (empty(trim($_POST["dataNascimento"]))) {
         $dataNascimento_err = "Please enter a date.";
         } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', trim($_POST["dataNascimento"]))) {
@@ -40,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 
-        // Validate email
         if (empty(trim($_POST["email"]))) {
             $email_err = "Please enter an email.";
         } elseif (!preg_match('/^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+$/', trim($_POST["email"]))) {
@@ -53,12 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        // Validate password
         if (!empty(trim($_POST["password"]))) {
             if (strlen(trim($_POST["password"])) < 6) {
                 $password_err = "Password must have atleast 6 characters.";
             } else {
-                // Validate confirm password
                 if (empty(trim($_POST["confirm_password"]))) {
                     $confirm_password_err = "Please confirm password.";
                 } else {
@@ -74,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $password = trim($_POST["old_password"]);
         }
 
-        // Check input errors before inserting in database
         if (empty($username_err) && empty($old_password_err) && empty($password_err) && empty($confirm_password_err) && empty($dataNascimento_err)&& empty($email_err) && empty($confirm_password_err)) {
             editUser($conn,$array1['id'], $password, $dataNascimento, $email);
             header("location:profile.php");

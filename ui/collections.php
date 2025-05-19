@@ -1,7 +1,7 @@
 <?php
 require_once("../dsl/connection.php");
 
-// Initialize the session
+
 if (!isset($_SESSION)) {
     session_start();
 }

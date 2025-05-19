@@ -3,13 +3,16 @@ require_once("../dsl/connection.php");
 require_once("../dsl/event_dao.php");
 
 session_start();
-$user_id = 1; // Por enquanto, até integrar com login
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: ../ui/login.php");
+    exit();
+}
 
+$user_id = $_SESSION['user_id'];
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dados = $_POST;
     $dados["image_path"] = "";
 
-    // Upload da imagem
     if (isset($_FILES['collectionImage']) && $_FILES['collectionImage']['error'] === 0) {
         $filename = basename($_FILES['collectionImage']['name']);
         $dest = "../fotos/" . time() . "_" . $filename;

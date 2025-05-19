@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $location = trim($_POST['location']);
     $description = trim($_POST['description']);
 
-    // Carrega evento direto do DB
     $stmt = $conn->prepare("SELECT * FROM events WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();

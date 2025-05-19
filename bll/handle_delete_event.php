@@ -9,7 +9,6 @@ if (!isset($_GET['id'])) {
 
 $id = intval($_GET['id']);
 
-// Busca evento
 $stmt = $conn->prepare("SELECT * FROM events WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -20,7 +19,6 @@ if (!$evento) {
     die("Evento não encontrado.");
 }
 
-// Verifica permissão
 $username = $_SESSION["username"];
 $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
 $stmt->bind_param("s", $username);
@@ -33,7 +31,6 @@ if ($user_id !== $evento['user_id']) {
     die("Você não tem permissão para deletar este evento.");
 }
 
-// Deleta evento
 $stmt = $conn->prepare("DELETE FROM events WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();

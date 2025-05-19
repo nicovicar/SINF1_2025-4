@@ -1,14 +1,12 @@
 <?php
 require_once("../dsl/connection.php");
 
-// Initialize the session
 if (!isset($_SESSION)) {
     session_start();
 }
-// 1) ID do livro vindo por GET, ex: book.php?id=3
+
 $book_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// 2) Busca segura (prepared statement)
 $stmt = $conn->prepare("SELECT * FROM books WHERE id = ?");
 $stmt->bind_param("i", $book_id);
 $stmt->execute();

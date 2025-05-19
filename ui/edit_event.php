@@ -17,7 +17,6 @@ if (!$evento) {
     die("Evento não encontrado.");
 }
 
-// Verifica se o usuário é o dono
 $username = $_SESSION["username"];
 $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
 $stmt->bind_param("s", $username);

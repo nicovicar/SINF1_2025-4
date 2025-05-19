@@ -1,7 +1,6 @@
 <?php
 require_once("../bll/load_collection.php");
 
-// Initialize the session
 if (!isset($_SESSION)) {
     session_start();
 }

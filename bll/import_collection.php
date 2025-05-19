@@ -4,17 +4,17 @@ require_once("../dsl/collection_dao.php");
 require_once("../dsl/book_dao.php");
 
 session_start();
-$user_id = 1; // Substituir futuramente por $_SESSION['user_id']
+$user_id = 1; 
 
 if ($_FILES['csv']['error'] === UPLOAD_ERR_OK) {
     $file = fopen($_FILES['csv']['tmp_name'], 'r');
-    $header = fgetcsv($file); // Ignora o cabeçalho
+    $header = fgetcsv($file); 
 
-    $colecoes_inseridas = []; // Evita inserir coleções duplicadas
+    $colecoes_inseridas = []; 
 
     while (($data = fgetcsv($file)) !== false) {
-        // Extrai dados da coleção da linha atual
-        $collection_key = $data[0] . '|' . $data[1] . '|' . $data[2]; // título|descrição|imagem
+
+        $collection_key = $data[0] . '|' . $data[1] . '|' . $data[2]; 
         if (!isset($colecoes_inseridas[$collection_key])) {
             $collection = [
                 'title' => $data[0],
@@ -27,7 +27,7 @@ if ($_FILES['csv']['error'] === UPLOAD_ERR_OK) {
             $collection_id = $colecoes_inseridas[$collection_key];
         }
 
-        // Extrai dados do livro
+      
         $book = [
             'title' => $data[3],
             'author' => $data[4],
@@ -44,7 +44,7 @@ if ($_FILES['csv']['error'] === UPLOAD_ERR_OK) {
             'image' => $data[15]
         ];
 
-        // Verifica se o livro já existe
+        
         $existing_id = findBookByTitleAuthor($conn, $book['title'], $book['author']);
 
         if ($existing_id) {
@@ -54,7 +54,6 @@ if ($_FILES['csv']['error'] === UPLOAD_ERR_OK) {
             $book_id = $conn->insert_id;
         }
 
-        // Relaciona à coleção
         linkBookToCollection($conn, $collection_id, $book_id);
     }
 

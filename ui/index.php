@@ -48,10 +48,8 @@ $event = $event_result->fetch_assoc();
 
     <main>
 
-        <!-- Título da coleção (ajustado com fonte maior) -->
         <h2 style="text-align: center; margin-top: 2rem; font-size: 2.2rem;">Coleção em alta</h2>
 
-        <!-- Imagem grande da coleção -->
         <section class="contentor-cinza" style="padding: 2rem;">
             <div class="wrap-imagen" style="max-width: 90%; margin: auto;">
                 <?php if ($collection): ?>
@@ -62,7 +60,6 @@ $event = $event_result->fetch_assoc();
             </div>
         </section>
 
-        <!-- Subtítulo do livro -->
         <h2 style="text-align: center; margin-top: 2rem;">Exemplar da Coleção</h2>
 
         <?php if ($book): ?>
@@ -86,7 +83,6 @@ $event = $event_result->fetch_assoc();
         </section>
         <?php endif; ?>
 
-        <!-- Título do evento -->
         <h2 style="text-align: center; margin-top: 2rem;">Evento em alta</h2>
 
         <?php if ($event): ?>

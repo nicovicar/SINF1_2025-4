@@ -1,19 +1,29 @@
 <?php
-// Initialize the session
+
 if (!isset($_SESSION)) {
-    session_start();
+  session_start();
 }
+
+require_once("../dsl/connection.php");
+
+
+$pre_collection_id = isset($_GET['collection_id']) ? intval($_GET['collection_id']) : 0;
+
+$collections_result = $conn->query("SELECT id, title FROM collections");
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adicionar Novo Livro</title>
   <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
   <div class="nome-pagina">
     <h1>The Book Collectors</h1>
@@ -77,6 +87,26 @@ if (!isset($_SESSION)) {
           <label for="description">Descrição:</label>
           <textarea id="description" name="description" rows="4" required></textarea>
         </div>
+        <div class="form-group">
+          <?php if ($pre_collection_id): ?>
+            <input type="hidden" name="collections[]" value="<?= $pre_collection_id ?>">
+            <p><em>Livro será ligado automaticamente à coleção criada.</em></p>
+          <?php else: ?>
+            <label for="collections">Coleções:</label>
+            <select id="collections" name="collections[]" multiple required>
+              <?php
+              if ($collections_result && $collections_result->num_rows > 0) {
+                while ($row = $collections_result->fetch_assoc()) {
+                  echo '<option value="' . $row['id'] . '">' .
+                    htmlspecialchars($row['title']) . '</option>';
+                }
+              } else {
+                echo '<option disabled>Nenhuma coleção disponível</option>';
+              }
+              ?>
+            </select>
+          <?php endif; ?>
+        </div>
         <button type="submit" class="btn-colecao">Adicionar Livro</button>
       </form>
     </section>
@@ -86,4 +116,5 @@ if (!isset($_SESSION)) {
     <p>The Book Collectors</p>
   </footer>
 </body>
+
 </html>

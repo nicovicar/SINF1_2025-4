@@ -1,5 +1,4 @@
 <?php
-// Initialize the session
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -31,8 +30,8 @@ if (!isset($_SESSION)) {
           <input type="file" id="collectionImage" name="collectionImage" accept="image/*" required>
         </div>
         <div class="form-group">
-          <label for="titles">Títulos da Coleção:</label>
-          <textarea id="titles" name="titles" rows="2" required></textarea>
+          <label for="title">Títulos da Coleção:</label>
+          <textarea id="title" name="title" rows="2" required></textarea>
         </div>
         <div class="form-group">
           <label for="description">Descrição:</label>

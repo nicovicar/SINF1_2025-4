@@ -1,7 +1,6 @@
 <?php
 require_once("../bll/handle_register.php");
 
-// Define variables and initialize with empty values
 $username = $password = $email = $dataNascimento = $confirm_password = "";
 $username_err = $password_err = $email_err = $dataNascimento_err =  $confirm_password_err = "";
 
@@ -10,10 +9,8 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     exit;
 }
 
-// Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Validate username
     if (empty(trim($_POST["username"]))) {
         $username_err = "Please enter a username.";
     } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))) {
@@ -26,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     
-    // Validate data de nascimento
      if (empty(trim($_POST["dataNascimento"]))) {
        $dataNascimento_err = "Please enter a date.";
     } else if (!preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', trim($_POST["dataNascimento"]))) {
@@ -36,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
-    // Validate email
     if (empty(trim($_POST["email"]))) {
         $email_err = "Please enter an email.";
     } elseif (!preg_match('/^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+$/', trim($_POST["email"]))) {
@@ -49,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Validate password
     if (empty(trim($_POST["password"]))) {
         $password_err = "Please enter a password.";
     } elseif (strlen(trim($_POST["password"])) < 6) {
@@ -58,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = trim($_POST["password"]);
     }
 
-    // Validate confirm password
     if (empty(trim($_POST["confirm_password"]))) {
         $confirm_password_err = "Please confirm password.";
     } else {
@@ -68,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Check input errors before inserting in database
     if (empty($username_err) && empty($password_err) && empty($dataNascimento_err)&& empty($email_err) && empty($confirm_password_err)) {
         registerUser($conn, $username, $password, $dataNascimento, $email);
         header("location:profile.php");
@@ -89,12 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-       <!-- Nome da página na parte superior -->
        <div class="nome-pagina">
         <h1>The Book Collectors</h1>
     </div>
 
-    <!-- Barra de Navegação logo abaixo -->
     <?php include "header.php"; ?>
  
   <main id="main-holder">

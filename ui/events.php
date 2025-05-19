@@ -14,7 +14,6 @@ $stmt->bind_result($user_id);
 $stmt->fetch();
 $stmt->close();
 
-// Pega eventos do usuário
 $stmt = $conn->prepare("SELECT * FROM events WHERE user_id = ? ORDER BY date DESC");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
