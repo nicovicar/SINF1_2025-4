@@ -7,7 +7,7 @@
     echo '<li><a href="collections.php">Coleções</a></li>';
     echo '<li><a href="events.php">Eventos</a></li>';
     echo '<li><a href="create_collections.php">Criar coleção</a></li>';
-    echo '<li><a href="create_events.php">Criar evento</a></li>';
+    echo '<li><a href="create_event.php">Criar evento</a></li>';
     echo '</ul>';
     echo '</nav>';
     echo '<form class="search-bar" action="search_results.php" method="GET">';
