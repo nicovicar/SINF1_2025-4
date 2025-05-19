@@ -53,12 +53,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     while ($row = $result->fetch_assoc()) {
                         echo '<section class="bloco-lateral">';
                         echo '  <div class="bloco-imagem">';
-                        echo '    <a href="collection.php?id=' . $row['id'] . '">';
                         echo '      <img src="' . htmlspecialchars($row["image_path"]) . '" alt="' . htmlspecialchars($row["title"]) . '">';
-                        echo '    </a>';
                         echo '  </div>';
                         echo '  <div class="bloco-info">';
-                        echo '    <h3>' . htmlspecialchars($row["title"]) . '</h3>';
+                        echo '    <a href="collection.php?id=' . $row['id'] . '">';
+                        echo '      <h3>' . htmlspecialchars($row["title"]) . '</h3>';
+                        echo '    </a>';
                         echo '    <p><strong>Descrição: </strong>' . nl2br(htmlspecialchars($row["description"])) . '</p>';
                         echo '  </div>';
                         echo '</section>';
@@ -83,12 +83,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     while ($row = $result->fetch_assoc()) {
                         echo '<section class="bloco-lateral">';
                         echo '  <div class="bloco-imagem">';
-                        echo '    <a href="events.php?id=' . $row['id'] . '">';
                         echo '      <img src="' . htmlspecialchars($row["image_path"]) . '" alt="' . htmlspecialchars($row["title"]) . '">';
-                        echo '    </a>';
                         echo '  </div>';
                         echo '  <div class="bloco-info">';
-                        echo '    <h3>' . htmlspecialchars($row["title"]) . '</h3>';
+                        echo '    <a href="events.php?id=' . $row['id'] . '">';
+                        echo '          <h3>' . htmlspecialchars($row["title"]) . '</h3>';
+                        echo '    </a>';
                         echo '    <p><strong>Descrição: </strong>' . nl2br(htmlspecialchars($row["description"])) . '</p>';
                         echo '  </div>';
                         echo '</section>';
