@@ -2,7 +2,9 @@
 require_once("../dsl/connection.php");
 require_once("../dsl/register_dao.php");
 
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 function existUser($conn, $username) {
     $sql = "SELECT id FROM users WHERE username = ?";

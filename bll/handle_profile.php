@@ -20,3 +20,11 @@ function getUser($conn, $username){
     
     return $array1;
 }
+
+function editUser($conn, $user_id, $password, $dataNascimento, $email){
+    $sql = "UPDATE users SET password = ?, dataNascimento= ?, email = ? WHERE id = ? ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssi",
+    $password,$dataNascimento,$email,$user_id);
+    return $stmt->execute();
+}
