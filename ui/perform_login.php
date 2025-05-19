@@ -3,7 +3,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-//include dal file
+
 require_once ("../bll/handle_login.php");
 
 // Check if the user is already logged in, if yes then redirect him to welcome page

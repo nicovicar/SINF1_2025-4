@@ -29,19 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (!checkUser($conn, $_SESSION["username"], $old_password)) {
         $old_password_err = "Old password incorrect.";
     } else {
-        // // Validate username
-        // if (empty(trim($_POST["username"]))) {
-        //     $username_err = "Please enter a username.";
-        // } elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))) {
-        //     $username_err = "Username can only contain letters, numbers, and underscores.";
-        // } else {
-        //     if (existUser($conn, trim($_POST['username'])) && $username != trim($_POST['username'])) {
-        //         $username_err = "This username is already taken.";
-        //     } else {
-        //         $username = trim($_POST["username"]);
-        //     }
-        // }
-        
+
         // Validate data de nascimento
         if (empty(trim($_POST["dataNascimento"]))) {
         $dataNascimento_err = "Please enter a date.";
